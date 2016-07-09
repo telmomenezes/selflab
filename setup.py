@@ -9,10 +9,10 @@ setup(
         'scipy',
         'click',
         'matplotlib',
-	'webpy'
+        'bottle'
     ],
     entry_points='''
         [console_scripts]
-        selflabweb=selflab.webserver:run
+        selflabweb=selflab.webserver
     ''',
 )

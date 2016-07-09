@@ -1,15 +1,9 @@
-import web
-        
-urls = (
-    '/(.*)', 'hello'
-)
-app = web.application(urls, globals())
+from bottle import route, run
 
-class hello:        
-    def GET(self, name):
-        if not name: 
-            name = 'World'
-        return 'Hello, ' + name + '!'
 
-if __name__ == "__main__":
-    app.run()
+@route('/hello')
+def hello():
+    return "Hello World!"
+
+
+run(host='localhost', port=8080, debug=True)
