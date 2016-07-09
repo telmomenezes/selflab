@@ -2,12 +2,13 @@ import sqlite3
 
 
 class DB:
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.conn = None
         self.cur = None
 
     def open(self):
-        self.conn = sqlite3.connect('selflab.db')
+        self.conn = sqlite3.connect(self.name)
         self.cur = self.conn.cursor()
 
     def close(self):
@@ -47,4 +48,3 @@ class DB:
         self.__exec_or_ignore("CREATE INDEX event_name ON event (name)")
 
         self.conn.commit()
-        self.close()

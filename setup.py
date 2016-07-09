@@ -13,6 +13,7 @@ setup(
     ],
     entry_points='''
         [console_scripts]
+        selflab=selflab.selflab:cli
         selflabweb=selflab.webserver
     ''',
 )
