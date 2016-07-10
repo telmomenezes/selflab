@@ -1,50 +1,32 @@
 import sqlite3
 
 
-class DB:
-    def __init__(self, name):
-        self.name = name
-        self.conn = None
-        self.cur = None
+def exec_or_ignore(cur, query):
+    print('Executing query: %s' % query)
+    try:
+        cur.execute(query)
+        print('executed.')
+    except:
+        print('ignored.')
 
-    def open(self):
-        self.conn = sqlite3.connect(self.name)
-        self.cur = self.conn.cursor()
 
-    def close(self):
-        self.cur.close()
-        self.conn.close()
+def create_db(file_path):
+    conn = sqlite3.connect(file_path)
+    cur = conn.cursor()
 
-    def query(self, q):
-        self.cur = self.conn.cursor()
-        self.cur.execute(q)
-        res = self.cur.fetchall()
-        self.cur.close()
-        return res
+    # create event table
+    exec_or_ignore(cur, 'CREATE TABLE event (id BIGINT PRIMARY KEY)')
+    exec_or_ignore(cur, 'ALTER TABLE event MODIFY id BIGINT AUTO_INCREMENT')
+    exec_or_ignore(cur, 'ALTER TABLE event ADD COLUMN ts INTEGER')
+    exec_or_ignore(cur, 'ALTER TABLE event ADD COLUMN name TEXT')
+    exec_or_ignore(cur, 'ALTER TABLE event ADD COLUMN type INTEGER')
+    exec_or_ignore(cur, 'ALTER TABLE event ADD COLUMN quantity INTEGER')
+    exec_or_ignore(cur, 'ALTER TABLE event ADD COLUMN value REAL')
+    exec_or_ignore(cur, 'ALTER TABLE event ADD COLUMN details TEXT')
 
-    def __exec_or_ignore(self, query):
-        print('Executing query: %s' % query)
-        try:
-            self.cur.execute(query)
-            print('executed.')
-        except:
-            print('ignored.')
+    exec_or_ignore(cur, 'CREATE INDEX event_ts ON event (ts)')
+    exec_or_ignore(cur, 'CREATE INDEX event_name ON event (name)')
 
-    def create_db(self):
-        # create tables
-        self.open()
-
-        # create event table
-        self.__exec_or_ignore("CREATE TABLE event (id BIGINT PRIMARY KEY)")
-        self.__exec_or_ignore("ALTER TABLE event MODIFY id BIGINT AUTO_INCREMENT")
-        self.__exec_or_ignore("ALTER TABLE event ADD COLUMN ts INTEGER")
-        self.__exec_or_ignore("ALTER TABLE event ADD COLUMN name TEXT")
-        self.__exec_or_ignore("ALTER TABLE event ADD COLUMN type INTEGER")
-        self.__exec_or_ignore("ALTER TABLE event ADD COLUMN quantity INTEGER")
-        self.__exec_or_ignore("ALTER TABLE event ADD COLUMN value REAL")
-        self.__exec_or_ignore("ALTER TABLE event ADD COLUMN details TEXT")
-
-        self.__exec_or_ignore("CREATE INDEX event_ts ON event (ts)")
-        self.__exec_or_ignore("CREATE INDEX event_name ON event (name)")
-
-        self.conn.commit()
+    conn.commit()
+    cur.close()
+    conn.close()

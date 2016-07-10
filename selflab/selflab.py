@@ -1,5 +1,5 @@
 import click
-from selflab.db import DB
+import selflab.db as db
 import selflab.web.server as webserv
 
 
@@ -15,11 +15,9 @@ def cli(ctx, db):
 @cli.command()
 @click.pass_context
 def create_db(ctx):
-    db_name = ctx.obj['dbname']
-    click.echo('Creating database %s' % db_name)
-    db = DB(db_name)
-    db.create_db()
-    db.close()
+    dbname = ctx.obj['dbname']
+    click.echo('Creating database %s' % dbname)
+    db.create_db(dbname)
 
 
 @cli.command()
