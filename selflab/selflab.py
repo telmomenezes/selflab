@@ -1,5 +1,6 @@
 import click
 from selflab.db import DB
+import selflab.web.server as webserv
 
 
 @click.group()
@@ -19,6 +20,14 @@ def create_db(ctx):
     db = DB(db_name)
     db.create_db()
     db.close()
+
+
+@cli.command()
+@click.pass_context
+def webserver(ctx):
+    dbname = ctx.obj['dbname']
+    click.echo('Using database %s' % dbname)
+    webserv.start(dbname)
 
 
 if __name__ == '__main__':
