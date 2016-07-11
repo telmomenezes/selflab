@@ -6,6 +6,8 @@ from selflab.web.sqliteplugin import SQLitePlugin
 
 
 app = application = bottle.Bottle()
+sqlite = SQLitePlugin(dbfile='selflab.db')
+bottle.install(sqlite)
 
 
 @route('/')
