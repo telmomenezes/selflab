@@ -5,11 +5,6 @@ from selflab.web import newevent
 from selflab.web.sqliteplugin import SQLitePlugin
 
 
-app = application = bottle.Bottle()
-sqlite = SQLitePlugin(dbfile='selflab.db')
-bottle.install(sqlite)
-
-
 @route('/')
 def home():
     return page.html('selflab', newevent.html())
@@ -29,3 +24,8 @@ def start(dbfile):
     sqlite = SQLitePlugin(dbfile=dbfile)
     bottle.install(sqlite)
     run(host='localhost', port=8080, debug=True)
+
+
+app = application = bottle.default_app()
+sqlite = SQLitePlugin(dbfile='selflab.db')
+bottle.install(sqlite)
