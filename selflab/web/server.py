@@ -5,6 +5,9 @@ from selflab.web import newevent
 from selflab.web.sqliteplugin import SQLitePlugin
 
 
+app = application = bottle.Bottle()
+
+
 @route('/')
 def home():
     return page.html('selflab', newevent.html())
