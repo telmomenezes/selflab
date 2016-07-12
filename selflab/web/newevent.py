@@ -4,15 +4,15 @@ import time
 def html():
     return """
     <form action='/new_event' method='post'>
-        Name:<br>
+        <h3>NAME</h3>
         <input type="text" name="name"><br>
-        Quantity:<br>
+        <h3>QUANTITY</h3>
         <input type="text" name="quantity"><br>
-        Value:<br>
+        <h3>VALUE</h3>
         <input type="text" name="value"><br>
-        Details:<br>
+        <h3>DETAILS</h3>
         <input type="text" name="details"><br>
-        <input type="submit" value="Add">
+        <input type="submit" value="ADD">
     </form>
     """
 

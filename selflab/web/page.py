@@ -1,3 +1,25 @@
+def css():
+    return """
+    body {
+        background-color: #FFF;
+    }
+    input {
+        width: 100%;
+        font-family:"Arial Black", Gadget, sans-serif;
+        font-size:x-large;
+    }
+    input[type=submit] {
+        margin-top:2em;
+    }
+    h3 {
+        font-family:"Arial Black", Gadget, sans-serif;
+        font-size:x-large;
+        color: #555;
+        margin-bottom:0px;
+    }
+    """
+
+
 def html(title, body):
     return """
     <!DOCTYPE html>
@@ -8,6 +30,11 @@ def html(title, body):
         <title>
             %s
         </title>
+        <style TYPE="text/css">
+        <!--
+        %s
+        -->
+        </style>
     </head>
 
     <body>
@@ -15,4 +42,4 @@ def html(title, body):
     </body>
 
     </html>
-    """ % (title, body)
+    """ % (title, css(), body)
