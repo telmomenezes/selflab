@@ -28,4 +28,13 @@ def last_event(db):
 
 def event2html(event):
     dt = datetime.datetime.fromtimestamp(event['ts']).strftime('%Y-%m-%d %H:%M:%S')
-    return '<p>[%s] %s x%s (%s) %s</p>' % (dt, event['name'], event['quantity'], event['value'], event['details'])
+    quantity = ''
+    if event['quantity'] is not None:
+        quantity = ' x%s' % event['quantity']
+    value = ''
+    if event['value'] is not None:
+        value = ' (%s)' % event['value']
+    details = ''
+    if len(event['details']) > 0:
+        details = ' -- %s' % event['details']
+    return '<div class="last-event">[%s] %s%s%s%s</div>' % (dt, event['name'], quantity, value, details)

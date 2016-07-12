@@ -17,6 +17,12 @@ def css():
         color: #555;
         margin-bottom:0px;
     }
+    .last-event {
+        font-family:"Arial Black", Gadget, sans-serif;
+        font-size:large;
+        color: #33A;
+        margin-top:2em;
+    }
     """
 
 
