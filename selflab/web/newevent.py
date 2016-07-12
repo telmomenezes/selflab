@@ -19,6 +19,6 @@ def html():
 
 def add(db, name, quantity, value, details):
     ts = int(time.time())
-    db.execute('INSERT INTO event (ts, name, type, quantity, value, details) VALUES (?, ?, ?, ?, ?)',
+    db.execute('INSERT INTO event (ts, name, type, quantity, value, details) VALUES (?, ?, ?, ?, ?, ?)',
                (ts, name, 0, int(quantity), float(value), details))
     db.commit()
