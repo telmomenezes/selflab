@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='selflab',
     version='0.1',
-    packages=find_packages(),
+    packages=['selflab'],
     install_requires=[
         'numpy',
         'scipy',
