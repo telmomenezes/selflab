@@ -15,8 +15,7 @@ def create_db(file_path):
     cur = conn.cursor()
 
     # create event table
-    exec_or_ignore(cur, 'CREATE TABLE event (id BIGINT PRIMARY KEY)')
-    exec_or_ignore(cur, 'ALTER TABLE event MODIFY id BIGINT AUTO_INCREMENT')
+    exec_or_ignore(cur, 'CREATE TABLE event (id INTEGER PRIMARY KEY)')
     exec_or_ignore(cur, 'ALTER TABLE event ADD COLUMN ts INTEGER')
     exec_or_ignore(cur, 'ALTER TABLE event ADD COLUMN name TEXT')
     exec_or_ignore(cur, 'ALTER TABLE event ADD COLUMN type INTEGER')
