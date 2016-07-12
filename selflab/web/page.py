@@ -19,7 +19,7 @@ def css():
     }
     .last-event {
         font-family:"Arial Black", Gadget, sans-serif;
-        font-size:large;
+        font-size:x-large;
         color: #33A;
         margin-top:2em;
     }
