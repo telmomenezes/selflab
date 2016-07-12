@@ -1,7 +1,13 @@
 import time
+import selflab.web.event as event
 
 
-def html():
+def html(db):
+    last_event_html = ''
+    last_event = event.last_event(db)
+    if last_event is not None:
+        last_event_html = event.event2html(last_event)
+
     return """
     <form action='/new_event' method='post'>
         <h3>NAME</h3>
@@ -14,7 +20,8 @@ def html():
         <input type="text" name="details"><br>
         <input type="submit" value="ADD">
     </form>
-    """
+    %s
+    """ % last_event_html
 
 
 def add(db, name, quantity, value, details):

@@ -6,8 +6,8 @@ from selflab.web.sqliteplugin import SQLitePlugin
 
 
 @route('/')
-def home():
-    return page.html('selflab', newevent.html())
+def home(db):
+    return page.html('selflab', newevent.html(db))
 
 
 @post('/new_event')
